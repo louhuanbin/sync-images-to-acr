@@ -1,0 +1,1 @@
+## sync deploy images to acr
