@@ -1,0 +1,60 @@
+name: Sync Images to ACR
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-images-to-acr
+  cancel-in-progress: false
+
+env:
+  ACR_LOGIN_SERVER: pcncr3.azurecr.cn
+
+jobs:
+  sync:
+    name: Mirror images to ACR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate ACR credentials
+        env:
+          ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
+          ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
+        run: |
+          test -n "$ACR_USERNAME"
+          test -n "$ACR_PASSWORD"
+
+      - name: Sign in to Azure Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Pull, tag, and push images
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          images=(
+            "clickhouse/clickhouse-server:25.12.5|clickhouse/clickhouse-server:25.12.5"
+            "signoz/signoz-otel-collector:v0.144.5|signoz/signoz-otel-collector:v0.144.5"
+            "signoz/signoz:v0.132.2|signoz/signoz:v0.132.2"
+            "otel/opentelemetry-collector-contrib:0.118.0|otel/opentelemetry-collector-contrib:0.118.0"
+            "nginx:1.27-alpine|nginx:1.27-alpine"
+            "minio/minio:RELEASE.2025-07-23T15-54-02Z|minio/minio:RELEASE.2025-07-23T15-54-02Z"
+            "minio/mc:RELEASE.2025-08-13T08-35-41Z|minio/mc:RELEASE.2025-08-13T08-35-41Z"
+          )
+
+          for image in "${images[@]}"; do
+            source_image="${image%%|*}"
+            target_image="${image##*|}"
+            destination="$ACR_LOGIN_SERVER/$target_image"
+
+            echo "Mirroring $source_image to $destination"
+            docker pull "$source_image"
+            docker tag "$source_image" "$destination"
+            docker push "$destination"
+          done
