@@ -16,3 +16,18 @@ The workflow mirrors these images:
 - `nginx:1.27-alpine`
 - `minio/minio:RELEASE.2025-07-23T15-54-02Z`
 - `minio/mc:RELEASE.2025-08-13T08-35-41Z`
+- `quay.io/keycloak/keycloak:26.7.0`
+
+```
+  images=(
+            "clickhouse/clickhouse-server:25.12.5|clickhouse/clickhouse-server:25.12.5"
+            "signoz/signoz-otel-collector:v0.144.5|signoz/signoz-otel-collector:v0.144.5"
+            "signoz/signoz:v0.132.2|signoz/signoz:v0.132.2"
+            "otel/opentelemetry-collector-contrib:0.118.0|otel/opentelemetry-collector-contrib:0.118.0"
+            "nginx:1.27-alpine|nginx:1.27-alpine"
+            "minio/minio:RELEASE.2025-07-23T15-54-02Z|minio/minio:RELEASE.2025-07-23T15-54-02Z"
+            "minio/mc:RELEASE.2025-08-13T08-35-41Z|minio/mc:RELEASE.2025-08-13T08-35-41Z"
+            "quay.io/keycloak/keycloak:26.7.0"
+          )
+
+```
