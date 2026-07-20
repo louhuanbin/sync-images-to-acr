@@ -43,7 +43,7 @@ jobs:
           set -euo pipefail
 
           images=(
-            "emqx/nanomq:0.22.13-slim"
+            "emqx/nanomq:0.25.2-2-slim"
           )
 
           for image in "${images[@]}"; do
