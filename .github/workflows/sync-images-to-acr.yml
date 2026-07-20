@@ -43,12 +43,16 @@ jobs:
           set -euo pipefail
 
           images=(
-            "registry.k8s.io/ingress-nginx/controller:v1.13.3"
+            "emqx/nanomq:0.22.13-slim"
           )
 
           for image in "${images[@]}"; do
             source_image="${image%%|*}"
-            target_image="ingress-nginx/controller:v1.13.3"
+            if [[ "$image" == *"|"* ]]; then
+              target_image="${image#*|}"
+            else
+              target_image="$source_image"
+            fi
             destination="$ACR_LOGIN_SERVER/$target_image"
 
             echo "Mirroring $source_image to $destination"

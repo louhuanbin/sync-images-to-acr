@@ -27,7 +27,10 @@ The workflow mirrors these images:
             "nginx:1.27-alpine|nginx:1.27-alpine"
             "minio/minio:RELEASE.2025-07-23T15-54-02Z|minio/minio:RELEASE.2025-07-23T15-54-02Z"
             "minio/mc:RELEASE.2025-08-13T08-35-41Z|minio/mc:RELEASE.2025-08-13T08-35-41Z"
-            "quay.io/keycloak/keycloak:26.7.0"
+            "quay.io/keycloak/keycloak:26.7.0|quay.io/keycloak/keycloak:26.7.0"
           )
 
 ```
+
+Each entry uses `source_image|target_image`. If the `|target_image` part is omitted,
+the workflow mirrors the image to the same repository path under ACR.
