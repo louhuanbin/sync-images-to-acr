@@ -56,7 +56,7 @@ jobs:
             destination="$ACR_LOGIN_SERVER/$target_image"
 
             echo "Mirroring $source_image to $destination"
-            docker pull "$source_image"
+            docker pull --platform linux/amd64 "$source_image"
             docker tag "$source_image" "$destination"
 
             for attempt in 1 2 3; do
