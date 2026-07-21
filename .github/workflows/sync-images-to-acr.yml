@@ -43,7 +43,7 @@ jobs:
           set -euo pipefail
 
           images=(
-            "rflowtest/rflow:latest"
+            "rflow:v0.22.0"
           )
 
           for image in "${images[@]}"; do
