@@ -43,7 +43,7 @@ jobs:
           set -euo pipefail
 
           images=(
-            "rflow:v0.22.0"
+            "infiniflow/ragflow:v0.22.0|rflow:v0.22.0"
           )
 
           for image in "${images[@]}"; do
