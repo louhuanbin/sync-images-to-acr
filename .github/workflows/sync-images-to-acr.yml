@@ -43,7 +43,10 @@ jobs:
           set -euo pipefail
 
           images=(
-            "infiniflow/ragflow:v0.22.0|rflow:v0.22.0"
+            "clickhouse/clickhouse-server:25.2"
+            "clickhouse/clickhouse-keeper:25.2"
+            "altinity/clickhouse-operator:0.24.5"
+            "altinity/metrics-exporter:0.24.5"
           )
 
           for image in "${images[@]}"; do
