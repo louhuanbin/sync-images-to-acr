@@ -43,10 +43,7 @@ jobs:
           set -euo pipefail
 
           images=(
-            "clickhouse/clickhouse-server:25.2"
-            "clickhouse/clickhouse-keeper:25.2"
-            "altinity/clickhouse-operator:0.24.5"
-            "altinity/metrics-exporter:0.24.5"
+            "apache/kafka:4.3.1"
           )
 
           for image in "${images[@]}"; do
