@@ -43,7 +43,7 @@ jobs:
           set -euo pipefail
 
           images=(
-            "electricsql/electric:1.7.7"
+            "tile38/tile38:latest"
           )
 
           for image in "${images[@]}"; do
