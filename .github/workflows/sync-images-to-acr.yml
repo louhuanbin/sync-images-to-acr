@@ -43,7 +43,7 @@ jobs:
           set -euo pipefail
 
           images=(
-            "tile38/tile38:latest"
+            "kafbat/kafka-ui:v1.5.0"
           )
 
           for image in "${images[@]}"; do
